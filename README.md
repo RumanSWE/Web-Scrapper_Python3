@@ -5,9 +5,9 @@ NOTE: This isnt to be used in the realworld and is for Hobby/Proof of concept on
 
 Use the Following Commands: 
 
-  py -m ensurepip --upgrade
-  py -m pip install beautifulsoup4
-  py -m pip install requests
+  py -m ensurepip --upgrade 
+  py -m pip install beautifulsoup4  
+  py -m pip install requests  
   
  
 
