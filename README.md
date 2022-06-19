@@ -7,7 +7,8 @@ Use the Following Commands:
 
   py -m ensurepip --upgrade                 
   py -m pip install beautifulsoup4                        
-  py -m pip install requests                                    
+  py -m pip install requests                                                                                          
+  pip install pandas                                                                                
   
  
 
