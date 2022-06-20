@@ -7,20 +7,17 @@
 #loop through and collect all data (title,company,salary,description,email,datePosted)
 #push to csv
 
-#use CSV results to filter for key words AKA 'PHP' 
-#BONUS: Send emails / quick apply with a CV which can be uploaded aswell
 
 #https://www.linkedin.com/jobs/
 
 import requests
 from bs4 import BeautifulSoup
-import re
 import pandas as pd
 
 
 
-def getPages(page,keyword):
-    URL = f'https://uk.indeed.com/jobs?q={keyword}&l=Manchester%2C+Greater+Manchester&start={page}'
+def getPages(page,keyword,location):
+    URL = f'https://uk.indeed.com/jobs?q={keyword}&l={location}&start={page}'
     headers = {'User-Agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/102.0.0.0 Safari/537.36'}
     page = requests.get(URL,headers)
     soup = BeautifulSoup(page.content, "html.parser")
@@ -55,22 +52,26 @@ def transform(soup):
     return
 
 print('Enter Single Keyword For Job (Keep Broad such as "Developer"):')
+#example (junior software)
+
 keyword = input()
 keyword = keyword.lower()
+keyword = keyword.replace(" ","%20")
+location= 'remote'
+#'Manchester%2C+Greater+Manchester' for Manchester
+#'Birmingham%2C%20West%20Midlands' for Birmingham
+
+print(keyword)
 
 jobList = []
 
-
 for i in range(0,620,10):
-    c = getPages(i,keyword)
+    c = getPages(i,keyword,location)
     transform(c)
 
 dataFrame = pd.DataFrame(jobList)
 print(dataFrame.head())
 dataFrame.to_csv('job.csv')
 
-#results = c.find_all("div", {"id": "searchCountPages"})[0].string.replace(",","").strip()
-#print(results)
-#print(re.findall(r"(\d+) jobs", results)[0])
 
 
